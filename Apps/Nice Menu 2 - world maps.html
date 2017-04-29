@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="description" content="Add imagery from a Web Map Service (WMS) server.">
+    <meta name="cesium-sandcastle-labels" content="Beginner">
+    <title>Cesium Demo</title>
+    <script type="text/javascript" src="../Sandcastle-header.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/requirejs-2.1.20/require.js"></script>
+    <script type="text/javascript">
+    require.config({
+        baseUrl : '../../../Source',
+        waitSeconds : 60
+    });
+    </script>
+</head>
+<body class="sandcastle-loading" data-sandcastle-bucket="bucket-requirejs.html">
+<style>
+    @import url(../templates/bucket.css);
+</style>
+<div id="cesiumContainer" class="fullSize"></div>
+<div id="loadingOverlay"><h1>Loading...</h1></div>
+<div id="toolbar"></div>
+<script id="cesium_sandcastle_script">
+function startup(Cesium) {
+    'use strict';
+//Sandcastle_Begin
+var viewer = new Cesium.Viewer('cesiumContainer');
+
+// Add a WMS imagery layer
+var imageryLayers = viewer.imageryLayers;
+
+function add_green_world_map(){
+    // Access Natural Earth II imagery, which uses a TMS tiling scheme and Geographic (EPSG:4326) project
+    var tms = new Cesium.UrlTemplateImageryProvider({
+        url : 'https://cesiumjs.org/tilesets/imagery/naturalearthii/{z}/{x}/{reverseY}.jpg',
+        tilingScheme : new Cesium.GeographicTilingScheme(),
+        maximumLevel : 5
+    });
+    imageryLayers.addImageryProvider(tms);
+}
+
+
+function add_gray_world_map(){
+    // Access the CartoDB Positron basemap, which uses an OpenStreetMap-like tiling scheme.
+    var positron = new Cesium.UrlTemplateImageryProvider({
+        url : 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+    });
+    imageryLayers.addImageryProvider(positron);
+}
+    
+
+function add_cities(){
+    var provider = new Cesium.WebMapServiceImageryProvider({
+        url : 'https://sampleserver1.arcgisonline.com/ArcGIS/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/WMSServer',
+        layers : '0',
+        proxy: new Cesium.DefaultProxy('/proxy/'),
+        parameters : {
+            transparent : true,
+            format : 'image/png'
+        }
+    });
+
+    imageryLayers.addImageryProvider(provider);
+}
+
+
+function add_demog(){
+    Sandcastle.declare(add_demog);
+    var esri = new Cesium.ArcGisMapServerImageryProvider({
+        url : 'https://server.arcgisonline.com/arcgis/rest/services/Demographics/USA_2000-2010_Population_Change/MapServer'
+    });
+    imageryLayers.addImageryProvider(esri);
+}
+
+
+function add_social_vuln_index(){
+    Sandcastle.declare(add_social_vuln_index);
+    var esri = new Cesium.ArcGisMapServerImageryProvider({
+        url : 'https://server.arcgisonline.com/arcgis/rest/services/Demographics/USA_Social_Vulnerability_Index/MapServer'
+    });
+    imageryLayers.addImageryProvider(esri);
+}
+
+
+function add_diversity_index(){  
+    Sandcastle.declare(add_diversity_index);
+    var esri = new Cesium.ArcGisMapServerImageryProvider({
+        url : 'https://server.arcgisonline.com/arcgis/rest/services/Demographics/USA_Diversity_Index/MapServer'
+    });
+    imageryLayers.addImageryProvider(esri);
+}
+
+
+function add_tapestry(){
+    Sandcastle.declare(add_tapestry);
+    var esri = new Cesium.ArcGisMapServerImageryProvider({
+        url : 'https://server.arcgisonline.com/arcgis/rest/services/Demographics/USA_Tapestry/MapServer'
+    });
+    imageryLayers.addImageryProvider(esri);
+}
+
+function add_roadMap(){
+    Sandcastle.declare(add_roadMap);
+    var esri1 = new Cesium.ArcGisMapServerImageryProvider({
+        url : 'https://server.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer'
+    });
+    imageryLayers.addImageryProvider(esri1);
+}
+
+function add_satellite_image(){
+    Sandcastle.declare(add_satellite_image);
+    var esri1 = new Cesium.ArcGisMapServerImageryProvider({
+        url : 'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer'
+    });
+    imageryLayers.addImageryProvider(esri1);
+    
+}
+
+function add_world_topo(){
+    Sandcastle.declare(add_satellite_image);
+    var esri1 = new Cesium.ArcGisMapServerImageryProvider({
+        url : 'https://server.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer'
+    });
+    imageryLayers.addImageryProvider(esri1);
+    
+}
+
+function addMarker(position){
+    Sandcastle.declare(addMarker);
+    viewer.entities.add({
+        position : position,
+        billboard : {
+            image : '../images/whiteShapes.png',
+            imageSubRegion : new Cesium.BoundingRectangle(105, 105, 18, 18),
+            color : Cesium.Color.YELLOW
+            }
+        });
+}
+
+function computeCirclularFlight(lon, lat, radius) {
+    var property = new Cesium.SampledPositionProperty();
+    for (var i = 0; i <= 360; i += 30) {
+        var radians = Cesium.Math.toRadians(i);
+        var time = Cesium.JulianDate.addSeconds(start, i, new Cesium.JulianDate());
+        var position = Cesium.Cartesian3.fromDegrees(lon + (radius * 1.5 * Math.cos(radians)), lat + (radius * Math.sin(radians)), 1000);
+        
+        property.addSample(time, position);       
+        addMarker(position);  
+        
+    }
+    return property;
+}
+
+viewer.scene.globe.enableLighting = true;
+
+viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
+  url : 'https://assets.agi.com/stk-terrain/world',
+  requestVertexNormals : true
+});
+
+viewer.scene.globe.depthTestAgainstTerrain = true;
+
+var start = Cesium.JulianDate.fromDate(new Date(2017, 4, 30, 11));
+var stop = Cesium.JulianDate.addSeconds(start, 360, new Cesium.JulianDate());
+
+viewer.clock.startTime = start.clone();
+viewer.clock.stopTime = stop.clone();
+viewer.clock.currentTime = start.clone();
+viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP;
+viewer.clock.multiplier = 0.5;
+
+
+/* ------------------ Plane Model Begin -------------------------------------- */
+/*
+  // Initially centered around Waterloo Region - Radius 1000km
+  var longitude = -80.5449;
+  var latitude = 43.4723;
+  var radius = 1.000;
+
+
+  //var modelURI = 'Cesium_Air.glb';
+    var modelURI = '../../SampleData/models/CesiumAir/Cesium_Air.glb';
+
+    var pos = computeCirclularFlight(longitude, latitude, radius);
+
+
+  var entity = viewer.entities.add({
+      availability : new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
+          start : start,
+          stop : stop
+      })]),
+      position : pos,
+      
+      //Automatically compute orientation based on position movement.
+      orientation : new Cesium.VelocityOrientationProperty(pos),
+      
+      model : {
+          uri : modelURI,
+          minimumPixelSize : 64
+      }
+  });
+
+  entity.position.setInterpolationOptions({
+      interpolationDegree : 2,
+      interpolationAlgorithm : Cesium.HermitePolynomialApproximation
+  });
+
+
+
+  // Set initial camera position and orientation to be when in the model's reference frame.
+  var camera = viewer.camera;
+  camera.position = new Cesium.Cartesian3(-50, 0.0, 5);
+  camera.direction = new Cesium.Cartesian3(1.0, 0.0, 0.0);
+  camera.up = new Cesium.Cartesian3(0.0, 0.0, 1.0);
+  camera.right = new Cesium.Cartesian3(0.0, -1.0, 0.0);
+
+*/
+
+/* ------------------- Plane Model End ---------------------------------------- */
+
+
+Sandcastle.addToolbarMenu([{
+    text : '--- World Maps ----',
+    
+}, {
+    text : 'Naturally coloured World map',
+    onselect : function() {
+        add_green_world_map();
+        Sandcastle.highlight(add_green_world_map);
+    }
+}, {
+    text : 'Satellite World',
+    onselect : function() {
+        add_satellite_image();
+        Sandcastle.highlight(add_satellite_image);
+    }
+},{
+    text : 'Grey world road map',
+    onselect : function() {
+        add_gray_world_map();
+        Sandcastle.highlight(add_gray_world_map);
+    }
+}, {
+    text : 'World topological',
+    onselect : function() {
+        add_world_topo();
+        Sandcastle.highlight(add_world_topo);
+    }
+}, {
+    text : '--- World Overlays ----',
+    
+},{
+    text : 'Add road map overlay',
+    onselect : function() {
+        add_roadMap();
+        Sandcastle.highlight(add_roadMap);
+    }
+}, {
+    text : '--- U.S.A Overlays ----',
+    
+},{
+    text : 'U.S.A States - general information',
+    onselect : function() {
+        add_cities();
+        Sandcastle.highlight(add_cities);
+    }
+}, {
+    text : 'U.S.A detailed population change',
+    onselect : function() {
+        add_demog();
+        Sandcastle.highlight(add_demog);
+    }
+},  {
+    text : 'Add Social Vulnerability Index',
+    onselect : function() {
+        add_social_vuln_index();
+        Sandcastle.highlight(add_social_vuln_index);
+    }
+}, {
+    text : 'Add Diversity Index',
+    onselect : function() {
+        add_diversity_index();
+        Sandcastle.highlight(add_diversity_index);
+    }
+}, {
+    text : 'Add Tapestry',
+    onselect : function() {
+        add_tapestry();
+        Sandcastle.highlight(add_tapestry);
+    }
+}]);
+
+
+
+
+
+Sandcastle.addToolbarMenu([{
+    text : '--- Location ----',
+    
+}]);
+//Sandcastle_End
+    Sandcastle.finishedLoading();
+}
+if (typeof Cesium !== "undefined") {
+    startup(Cesium);
+} else if (typeof require === "function") {
+    require(["Cesium"], startup);
+}
+</script>
+</body>
+</html>
