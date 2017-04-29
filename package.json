@@ -30,6 +30,7 @@
     "email": "cesium-dev@googlegroups.com"
   },
   "dependencies": {
+    "compression": "^1.6.2",
     "express": "^4.15.2",
     "express-generator": "^4.15.0",
     "requirejs": "^2.3.2"
