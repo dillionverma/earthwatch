@@ -21,6 +21,9 @@
     "map",
     "globe"
   ],
+  "engines":[
+    "node": "6.9.5"
+  ]
   "repository": {
     "type": "git",
     "url": "https://github.com/AnalyticalGraphicsInc/cesium.git"
