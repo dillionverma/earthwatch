@@ -1,0 +1,253 @@
+{"queryresult" : {
+	"success" : true, 
+	"error" : false, 
+	"numpods" : 6, 
+	"datatypes" : "AdministrativeDivision,Cartographic,City,Country", 
+	"timedout" : "LatitudeLongitude", 
+	"timedoutpods" : "", 
+	"timing" : 6.098, 
+	"parsetiming" : 0.669, 
+	"parsetimedout" : false, 
+	"recalculate" : "http:\/\/www5a.wolframalpha.com\/api\/v2\/recalc.jsp?id=MSPa6311i5a644aecgbi108000039028iaeg9g1c9372261112142557459033&output=JSON", 
+	"id" : "MSPa6321i5a644aecgbi108000042gf3fb0064dg2cb", 
+	"host" : "http:\/\/www5a.wolframalpha.com", 
+	"server" : "63", 
+	"related" : "http:\/\/www5a.wolframalpha.com\/api\/v2\/relatedQueries.jsp?id=MSPa6331i5a644aecgbi10800002530cbd4ie6b0fc92261112142557459033", 
+	"version" : "2.6", 
+	"pods" : [
+		{
+			"title" : "Input interpretation", 
+			"scanner" : "Identity", 
+			"id" : "Input", 
+			"position" : 100, 
+			"error" : false, 
+			"numsubpods" : 1, 
+			"subpods" : [
+				{
+					"title" : "", 
+					"img" : {
+						"src" : "http:\/\/www5a.wolframalpha.com\/Calculate\/MSP\/MSP6341i5a644aecgbi10800003iifdb5e4be4a23g?MSPStoreType=image\/gif&s=63", 
+						"alt" : "14.344°N, 34.41°E", 
+						"title" : "14.344°N, 34.41°E", 
+						"width" : 202, 
+						"height" : 23
+					}, 
+					"plaintext" : "14.344°N, 34.41°E"
+				}
+			]
+		}, 
+		{
+			"title" : "Local map", 
+			"scanner" : "LatitudeLongitude", 
+			"id" : "CartographicMap", 
+			"position" : 200, 
+			"error" : false, 
+			"numsubpods" : 1, 
+			"subpods" : [
+				{
+					"title" : "", 
+					"img" : {
+						"src" : "http:\/\/www5a.wolframalpha.com\/Calculate\/MSP\/MSP6351i5a644aecgbi1080000180bbc886d8gc536?MSPStoreType=image\/gif&s=63", 
+						"alt" : "", 
+						"title" : "", 
+						"width" : 550, 
+						"height" : 278
+					}, 
+					"plaintext" : ""
+				}
+			], 
+			"states" : [
+				{
+					"count" : 13, 
+					"value" : "10 kilometers across", 
+					"delimiters" : "", 
+					"states" : [
+						{
+							"name" : "10 kilometers across", 
+							"input" : "CartographicMap__10 kilometers across"
+						}, 
+						{
+							"name" : "20 kilometers across", 
+							"input" : "CartographicMap__20 kilometers across"
+						}, 
+						{
+							"name" : "40 kilometers across", 
+							"input" : "CartographicMap__40 kilometers across"
+						}, 
+						{
+							"name" : "80 kilometers across", 
+							"input" : "CartographicMap__80 kilometers across"
+						}, 
+						{
+							"name" : "160 kilometers across", 
+							"input" : "CartographicMap__160 kilometers across"
+						}, 
+						{
+							"name" : "320 kilometers across", 
+							"input" : "CartographicMap__320 kilometers across"
+						}, 
+						{
+							"name" : "650 kilometers across", 
+							"input" : "CartographicMap__650 kilometers across"
+						}, 
+						{
+							"name" : "1300 kilometers across", 
+							"input" : "CartographicMap__1300 kilometers across"
+						}, 
+						{
+							"name" : "2600 kilometers across", 
+							"input" : "CartographicMap__2600 kilometers across"
+						}, 
+						{
+							"name" : "5200 kilometers across", 
+							"input" : "CartographicMap__5200 kilometers across"
+						}, 
+						{
+							"name" : "10000 kilometers across", 
+							"input" : "CartographicMap__10000 kilometers across"
+						}, 
+						{
+							"name" : "18000 kilometers across", 
+							"input" : "CartographicMap__18000 kilometers across"
+						}, 
+						{
+							"name" : "35000 kilometers across", 
+							"input" : "CartographicMap__35000 kilometers across"
+						}
+					]
+				}, 
+				{
+					"name" : "Non-metric", 
+					"input" : "CartographicMap__Non-metric"
+				}, 
+				{
+					"name" : "Smaller display", 
+					"input" : "CartographicMap__Smaller display"
+				}
+			], 
+			"infos" : {
+				"links" : {
+					"url" : "http:\/\/maps.google.com?ie=UTF8&z=16&t=k&ll=14.344%2C34.41&q=14.344%20N%2C%2034.41%20E", 
+					"text" : "Satellite image"
+				}
+			}
+		}, 
+		{
+			"title" : "Coordinates", 
+			"scanner" : "LatitudeLongitude", 
+			"id" : "Coordinates", 
+			"position" : 300, 
+			"error" : false, 
+			"numsubpods" : 1, 
+			"primary" : true, 
+			"subpods" : [
+				{
+					"title" : "", 
+					"img" : {
+						"src" : "http:\/\/www5a.wolframalpha.com\/Calculate\/MSP\/MSP6361i5a644aecgbi10800000ih08d2accg82c7g?MSPStoreType=image\/gif&s=63", 
+						"alt" : "14.344°N, 34.41°E", 
+						"title" : "14.344°N, 34.41°E", 
+						"width" : 202, 
+						"height" : 23
+					}, 
+					"plaintext" : "14.344°N, 34.41°E"
+				}
+			], 
+			"states" : [
+				{
+					"name" : "Show DMS", 
+					"input" : "Coordinates__Show DMS"
+				}
+			]
+		}, 
+		{
+			"title" : "Nearest city", 
+			"scanner" : "LatitudeLongitude", 
+			"id" : "CartographicNearestCity", 
+			"position" : 400, 
+			"error" : false, 
+			"numsubpods" : 1, 
+			"subpods" : [
+				{
+					"title" : "", 
+					"img" : {
+						"src" : "http:\/\/www5a.wolframalpha.com\/Calculate\/MSP\/MSP6371i5a644aecgbi108000018754i4iga6ai798?MSPStoreType=image\/gif&s=63", 
+						"alt" : "al-Faw, Gadaref, Sudan (23 km  (kilometers) south-southwest) (population: 30629 people)", 
+						"title" : "al-Faw, Gadaref, Sudan (23 km  (kilometers) south-southwest) (population: 30629 people)", 
+						"width" : 400, 
+						"height" : 38
+					}, 
+					"plaintext" : "al-Faw, Gadaref, Sudan (23 km  (kilometers) south-southwest) (population: 30629 people)"
+				}
+			], 
+			"states" : [
+				{
+					"name" : "Show non-metric", 
+					"input" : "CartographicNearestCity__Show non-metric"
+				}
+			]
+		}, 
+		{
+			"title" : "Local elevation", 
+			"scanner" : "LatitudeLongitude", 
+			"id" : "CartographicElevation", 
+			"position" : 500, 
+			"error" : false, 
+			"numsubpods" : 1, 
+			"subpods" : [
+				{
+					"title" : "", 
+					"img" : {
+						"src" : "http:\/\/www5a.wolframalpha.com\/Calculate\/MSP\/MSP6381i5a644aecgbi10800002968h4i8344e55e9?MSPStoreType=image\/gif&s=63", 
+						"alt" : "459 meters", 
+						"title" : "459 meters", 
+						"width" : 70, 
+						"height" : 18
+					}, 
+					"plaintext" : "459 meters"
+				}
+			], 
+			"states" : [
+				{
+					"name" : "Show non-metric", 
+					"input" : "CartographicElevation__Show non-metric"
+				}, 
+				{
+					"name" : "Show topography", 
+					"input" : "CartographicElevation__Show topography"
+				}
+			]
+		}, 
+		{
+			"title" : "Current local time", 
+			"scanner" : "LatitudeLongitude", 
+			"id" : "CartographicCurrentTime", 
+			"position" : 600, 
+			"error" : false, 
+			"numsubpods" : 1, 
+			"subpods" : [
+				{
+					"title" : "", 
+					"img" : {
+						"src" : "http:\/\/www5a.wolframalpha.com\/Calculate\/MSP\/MSP6391i5a644aecgbi10800000d56dd6d5gdc0agd?MSPStoreType=image\/gif&s=63", 
+						"alt" : "5:41 am EAT  |  Saturday, April 29, 2017", 
+						"title" : "5:41 am EAT  |  Saturday, April 29, 2017", 
+						"width" : 273, 
+						"height" : 18
+					}, 
+					"plaintext" : "5:41 am EAT  |  Saturday, April 29, 2017"
+				}
+			]
+		}
+	], 
+	"sources" : [
+		{
+			"url" : "http:\/\/www.wolframalpha.com\/sources\/CityDataSourceInformationNotes.html", 
+			"text" : "City data"
+		}, 
+		{
+			"url" : "http:\/\/www.wolframalpha.com\/sources\/OpenStreetMapSourceInformationNotes.html", 
+			"text" : "Open street map"
+		}
+	]
+}}
