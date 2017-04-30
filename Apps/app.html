@@ -7,19 +7,19 @@
     <meta name="description" content="Use Viewer to start building new applications or easily embed Cesium into existing applications.">
     <meta name="cesium-sandcastle-labels" content="Beginner, Showcases">
     <title>Cesium Demo</title>
-    <script type="text/javascript" src="../Sandcastle-header.js"></script>
-    <script type="text/javascript" src="../../../ThirdParty/requirejs-2.1.20/require.js"></script>
+    <script type="text/javascript" src="Sandcastle-header.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.js"></script>
     <script type="text/javascript">
     require.config({
-        baseUrl : '../../../Source',
+        baseUrl : '../Source',
         waitSeconds : 60
     });
     </script>
 </head>
 <body class="sandcastle-loading" data-sandcastle-bucket="bucket-requirejs.html">
 <style>
-    @import url(../templates/bucket.css);
-    
+    @import url(bucket.css);
+
     #vid1, #vid2, #vid3, #s1, #s2 {
         position: absolute;
         bottom: 75px;
@@ -27,8 +27,8 @@
         width: 320px;
         height: 180px;
     }
- 
-    
+
+
 </style>
 <div id="cesiumContainer" class="fullSize"></div>
 <div id="loadingOverlay"><h1>Loading...</h1></div>
@@ -66,12 +66,12 @@ var viewer = new Cesium.Viewer('cesiumContainer', {
 
 function addVideoBall(lon, lat, src, id){
     var video = document.getElementById(id);
-    
+
     video.src = src;
     video.volume = 0;
     video.display = "none";
-    
-    
+
+
     var sphere = viewer.entities.add({
         position : Cesium.Cartesian3.fromDegrees(lon, lat, 1000),
         ellipsoid : {
@@ -79,18 +79,18 @@ function addVideoBall(lon, lat, src, id){
             material : video
         }
     });
-} 
+}
 
 
 // volume [0,1]
 function addBackSound(src, id, vol){
     var video = document.getElementById(id);
-    
+
     video.src = src;
     video.volume = vol;
     video.display = "none";
-    
-    
+
+
     var sphere = viewer.entities.add({
         position : Cesium.Cartesian3.fromDegrees(0, 0, 1),
         ellipsoid : {
@@ -122,7 +122,7 @@ function add_gray_world_map(){
     });
     imageryLayers.addImageryProvider(positron);
 }
-    
+
 
 function add_cities(){
     var provider = new Cesium.WebMapServiceImageryProvider({
@@ -157,7 +157,7 @@ function add_social_vuln_index(){
 }
 
 
-function add_diversity_index(){  
+function add_diversity_index(){
     Sandcastle.declare(add_diversity_index);
     var esri = new Cesium.ArcGisMapServerImageryProvider({
         url : 'https://server.arcgisonline.com/arcgis/rest/services/Demographics/USA_Diversity_Index/MapServer'
@@ -188,7 +188,7 @@ function add_satellite_image(){
         url : 'https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer'
     });
     imageryLayers.addImageryProvider(esri1);
-    
+
 }
 
 function add_world_topo(){
@@ -197,7 +197,7 @@ function add_world_topo(){
         url : 'https://server.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer'
     });
     imageryLayers.addImageryProvider(esri1);
-    
+
 }
 
 function addMarker(position){
@@ -218,48 +218,48 @@ function computeCirclularFlight(lon, lat, radius) {
         var radians = Cesium.Math.toRadians(i);
         var time = Cesium.JulianDate.addSeconds(start, i, new Cesium.JulianDate());
         var position = Cesium.Cartesian3.fromDegrees(lon + (radius * 1.5 * Math.cos(radians)), lat + (radius * Math.sin(radians)), 1000);
-        
-        property.addSample(time, position);       
-        //addMarker(position);  
-        
+
+        property.addSample(time, position);
+        //addMarker(position);
+
     }
     return property;
 }
 
 function change_time(ind){
-    
+
     var new_src;
- 
+
     // 00-10s
     if (ind === 1){
         //Empire State
-        document.getElementById("vid1").src = new_src;
+        document.getElementById("vid1").src = "videos/empirenew.mp4";
         //Statue of Liberty
-        document.getElementById("vid2").src = new_src;
+        document.getElementById("vid2").src = "videos/liberty1.mp4";
         //Central Park
-        document.getElementById("vid3").src = new_src;
-        
-        
+        document.getElementById("vid3").src = "videos/central1.mp4";
+
+
     // 90-00s
     } else if (ind === 2){
         //Empire State
-        document.getElementById("vid1").src = new_src;
+        document.getElementById("vid1").src = "videos/empireold.mp4";
         //Statue of Liberty
-        document.getElementById("vid2").src = new_src;
+        document.getElementById("vid2").src = "videos/liberty2.mp4";
         //Central Park
-        document.getElementById("vid3").src = new_src;
-        
-        
+        document.getElementById("vid3").src = "videos/central2.mp4";
+
+
     // 80-90s
     } else if (ind === 3){
         //Empire State
-        document.getElementById("vid1").src = new_src;
+        document.getElementById("vid1").src = "videos/empireold.mp4";
         //Statue of Liberty
-        document.getElementById("vid2").src = new_src;
+        document.getElementById("vid2").src = "videos/liberty3.mp4";
         //Central Park
-        document.getElementById("vid3").src = new_src;
+        document.getElementById("vid3").src = "videos/central2.mp4";
     }
-    
+
 }
 
 
@@ -299,7 +299,7 @@ viewer.scene.preRender.addEventListener(function(scene, time) {
           transform = Cesium.Matrix4.fromRotationTranslation(Cesium.Matrix3.fromQuaternion(orientation), position);
       }
 
-      
+
       // Save camera state
       var offset = Cesium.Cartesian3.clone(camera.position);
       var direction = Cesium.Cartesian3.clone(camera.direction);
@@ -309,46 +309,46 @@ viewer.scene.preRender.addEventListener(function(scene, time) {
       camera.lookAtTransform(transform);
 
       // Reset the camera state to the saved state so it appears fixed in the model's frame.
-      
+
       Cesium.Cartesian3.clone(offset, camera.position);
       Cesium.Cartesian3.clone(direction, camera.direction);
       Cesium.Cartesian3.clone(up, camera.up);
       Cesium.Cartesian3.cross(direction, up, camera.right);
-      
-      
+
+
   });
 
 
 function change_flight(lon, lat, rad){
-    
+
     // lon - longitude
     // lat - latiude
     // rad - radius (1000s km)
-    
+
     longitude = lon;
     latitude = lat;
     radius = rad;
-    
+
     pos = computeCirclularFlight(longitude, latitude, radius);
-    
-    //var modelURI = 'Cesium_Air.glb';
-    var modelURI = '../../SampleData/models/CesiumAir/Cesium_Air.glb';
+
+    var modelURI = 'Cesium_Air.glb';
+    // var modelURI = '../../SampleData/models/CesiumAir/Cesium_Air.glb';
 
     var pos = computeCirclularFlight(longitude, latitude, radius);
 
     viewer.entities.remove(entity);
-    
-    
+
+
     entity = viewer.entities.add({
       availability : new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
           start : start,
           stop : stop
       })]),
       position : pos,
-      
+
       //Automatically compute orientation based on position movement.
       orientation : new Cesium.VelocityOrientationProperty(pos),
-      
+
       model : {
           uri : modelURI,
           minimumPixelSize : 64
@@ -368,8 +368,8 @@ function change_flight(lon, lat, rad){
   camera.direction = new Cesium.Cartesian3(1.0, 0.0, 0.0);
   camera.up = new Cesium.Cartesian3(0.0, 0.0, 1.0);
   camera.right = new Cesium.Cartesian3(0.0, -1.0, 0.0);
-    
-    
+
+
 }
 
 
@@ -384,8 +384,8 @@ function change_flight(lon, lat, rad){
 
 
 
-  //var modelURI = 'Cesium_Air.glb';
-    var modelURI = '../../SampleData/models/CesiumAir/Cesium_Air.glb';
+  var modelURI = 'Cesium_Air.glb';
+    // var modelURI = '../../SampleData/models/CesiumAir/Cesium_Air.glb';
 
     var pos = computeCirclularFlight(longitude, latitude, radius);
 
@@ -396,10 +396,10 @@ function change_flight(lon, lat, rad){
           stop : stop
       })]),
       position : pos,
-      
+
       //Automatically compute orientation based on position movement.
       orientation : new Cesium.VelocityOrientationProperty(pos),
-      
+
       model : {
           uri : modelURI,
           minimumPixelSize : 64
@@ -412,7 +412,7 @@ function change_flight(lon, lat, rad){
       interpolationAlgorithm : Cesium.HermitePolynomialApproximation
   });
 
-    
+
 
   // Set initial camera position and orientation to be when in the model's reference frame.
   var camera = viewer.camera;
@@ -427,23 +427,23 @@ function change_flight(lon, lat, rad){
 /* -------------------- Media Begin ---------------------------------------*/
 
 /* Empire state building */
-addVideoBall(-73.9857, 40.7484, "https://cesiumjs.org/videos/Sandcastle/big-buck-bunny_trailer.mp4", "vid1");
+addVideoBall(-73.9857, 40.7484, "videos/empireold.mp4", "vid1");
+//
+//
+// /* Statue of Liberty */
+// addVideoBall(-74.0445, 40.6892, "videos/liberty2.mp4", "vid2");
+//
+//
+// /* Central Park */
+// addVideoBall(-73.9654, 40.7829, "videos/central2.mp4", "vid3");
 
 
-/* Statue of Liberty */
-addVideoBall(-74.0445, 40.6892, "https://cesiumjs.org/videos/Sandcastle/big-buck-bunny_trailer.mp4", "vid2");
-
-
-/* Central Park */
-addVideoBall(-73.9654, 40.7829, "https://cesiumjs.org/videos/Sandcastle/big-buck-bunny_trailer.mp4", "vid3");
-
-
-// Sound 1
-addBackSound("https://cesiumjs.org/videos/Sandcastle/big-buck-bunny_trailer.mp4", "s1", 0);
-
-
-// Sound 2
-addBackSound("https://cesiumjs.org/videos/Sandcastle/big-buck-bunny_trailer.mp4", "s2", 0);
+// // Sound 1
+// addBackSound("https://cesiumjs.org/videos/Sandcastle/big-buck-bunny_trailer.mp4", "s1", 0);
+//
+//
+// // Sound 2
+// addBackSound("https://cesiumjs.org/videos/Sandcastle/big-buck-bunny_trailer.mp4", "s2", 0);
 
 
 /* ----------------------- Media End ----------------------------------------- */
@@ -453,7 +453,7 @@ addBackSound("https://cesiumjs.org/videos/Sandcastle/big-buck-bunny_trailer.mp4"
 
 Sandcastle.addToolbarMenu([{
     text : '--- World Maps ----',
-    
+
 }, {
     text : 'No Map',
     onselect : function() {
@@ -485,7 +485,7 @@ Sandcastle.addToolbarMenu([{
     }
 }, {
     text : '--- World Overlays ----',
-    
+
 },{
     text : 'Add road map overlay',
     onselect : function() {
@@ -494,7 +494,7 @@ Sandcastle.addToolbarMenu([{
     }
 }, {
     text : '--- U.S.A Overlays ----',
-    
+
 },{
     text : 'U.S.A States - general information',
     onselect : function() {
@@ -533,7 +533,7 @@ Sandcastle.addToolbarMenu([{
 
 Sandcastle.addToolbarMenu([{
     text : '--- Location ----',
-    
+
 },{
     text : 'New York',
     onselect : function() {
@@ -555,7 +555,7 @@ Sandcastle.addToolbarMenu([{
 // Time Menu
 Sandcastle.addToolbarMenu([{
     text : '--- Time Period ----',
-    
+
 },{
     text : '00-10s',
     onselect : function() {
